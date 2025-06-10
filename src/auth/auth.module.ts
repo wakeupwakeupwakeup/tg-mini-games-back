@@ -1,11 +1,28 @@
 import { Module } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
 import { AuthController } from './auth.controller';
+import { JwtModule, JwtService } from '@nestjs/jwt';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
-import { JwtService } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
 
 @Module({
-  providers: [PrismaService, AuthService, JwtService],
+  imports: [
+    JwtModule.register({
+      global: true,
+      secret: new ConfigService().get('BOT_TOKEN'),
+    }),
+  ],
+  providers: [
+    PrismaService,
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+    JwtService,
+    AuthService,
+  ],
   controllers: [AuthController],
 })
 export class AuthModule {}

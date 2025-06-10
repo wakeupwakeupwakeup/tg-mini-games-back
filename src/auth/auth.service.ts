@@ -3,6 +3,7 @@ import { PrismaService } from '../prisma.service';
 import { isValid, parse } from '@telegram-apps/init-data-node';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
+import { JwtPayload } from './auth.guard';
 
 @Injectable()
 export class AuthService {
@@ -47,7 +48,11 @@ export class AuthService {
       });
     }
 
-    const payload = { id: user.id, username: user.username, tgId: user.tgId };
+    const payload: JwtPayload = {
+      id: user.id,
+      username: user.username,
+      tgId: user.tgId,
+    };
 
     return {
       accessToken: await this.jwtService.signAsync(payload, {

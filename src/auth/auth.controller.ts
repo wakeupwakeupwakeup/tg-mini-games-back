@@ -1,11 +1,13 @@
 import { Body, Controller, Post, Res } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { FastifyReply } from 'fastify';
+import { Public } from './auth.decorator';
 
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
+  @Public()
   @Post()
   async authenticate(
     @Body() body: { initData: string },
