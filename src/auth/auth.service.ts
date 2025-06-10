@@ -41,6 +41,8 @@ export class AuthService {
         data: {
           tgId,
           username,
+          balance:
+            (this.configService.get('INIT_USER_BALANCE') as number) ?? 100,
         },
       });
     }
