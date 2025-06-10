@@ -8,12 +8,14 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  tgId      Int      @unique
-  balance   Int      @default(0)
-  username  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         String   @id @default(uuid())
+  tgId       Int      @unique
+  balance    Int      @default(0)
+  totalGames Int      @default(0)
+  totalWins  Int      @default(0)
+  username   String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
   @@map("users")
 }

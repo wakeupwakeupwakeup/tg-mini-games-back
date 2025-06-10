@@ -12,4 +12,9 @@ export class UserController {
   async getBalance(@Req() req: FastifyRequest) {
     return this.userService.getBalance(req.user.tgId);
   }
+
+  @Get('/games-stats')
+  async getGamesStats(@Req() req: FastifyRequest) {
+    return this.userService.getGamesStats(req.user.tgId);
+  }
 }

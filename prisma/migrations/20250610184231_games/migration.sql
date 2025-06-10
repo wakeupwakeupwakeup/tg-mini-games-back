@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "users" ADD COLUMN     "totalGames" INTEGER NOT NULL DEFAULT 0,
+ADD COLUMN     "totalWins" INTEGER NOT NULL DEFAULT 0;

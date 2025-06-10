@@ -24,7 +24,6 @@ export class AuthService {
     }
 
     const userData = parse(initData).user;
-    console.log(userData);
 
     if (!userData) {
       throw new BadRequestException('Invalid init data');

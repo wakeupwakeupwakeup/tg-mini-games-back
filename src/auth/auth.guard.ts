@@ -43,7 +43,6 @@ export class AuthGuard implements CanActivate {
       return true;
     }
     const request: FastifyRequest = context.switchToHttp().getRequest();
-    console.log(request);
 
     const accessToken = this.extractTokenFromCookies(request);
 

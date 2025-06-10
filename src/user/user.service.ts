@@ -14,4 +14,17 @@ export class UserService {
 
     return user.balance;
   }
+
+  async getGamesStats(tgId: number) {
+    const user = await this.prisma.user.findUnique({ where: { tgId } });
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    return {
+      totalGames: user.totalGames,
+      totalWins: user.totalWins,
+    };
+  }
 }
