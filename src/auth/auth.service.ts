@@ -19,11 +19,12 @@ export class AuthService {
       this.configService.get('BOT_TOKEN') as string,
     );
 
-    if (!isInitDataValid) {
+    if (!isInitDataValid && process.env.NODE_ENV !== 'development') {
       throw new BadRequestException('Invalid init data');
     }
 
     const userData = parse(initData).user;
+    console.log(userData);
 
     if (!userData) {
       throw new BadRequestException('Invalid init data');
@@ -42,8 +43,7 @@ export class AuthService {
         data: {
           tgId,
           username,
-          balance:
-            (this.configService.get('INIT_USER_BALANCE') as number) ?? 100,
+          balance: Number(this.configService.get('INIT_USER_BALANCE') ?? 100),
         },
       });
     }

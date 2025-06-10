@@ -17,7 +17,8 @@ async function bootstrap() {
     secret: configService.get('BOT_TOKEN') as string,
   });
   app.enableCors({
-    origin: '*',
+    origin: ['http://localhost:3000', 'https://igra.top'],
+    credentials: true,
   });
   await app.listen(process.env.PORT ?? 8080);
 }
