@@ -7,7 +7,10 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Post()
-  async authenticate(@Body() body: { initData: string }, @Res() res: Response) {
+  async authenticate(
+    @Body() body: { initData: string },
+    @Res({ passthrough: true }) res: Response,
+  ) {
     const { accessToken, refreshToken } = await this.authService.authenticate(
       body.initData,
     );
